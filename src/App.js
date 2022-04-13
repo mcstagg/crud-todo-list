@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 
-function App() {
+const App = () => {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
 
@@ -11,8 +11,8 @@ function App() {
     setInput(['']);
   }
 
-  const removeTodo = ({ e, currentToDo}) => {
-    const removeItem = todos.filter((todo) => todo !== currentToDo);
+  const removeTodo = task => {
+    const removeItem = todos.filter(todo => todo !== task);
     setTodos(removeItem);
   }
 
@@ -20,15 +20,15 @@ function App() {
     <div className="app">
       <h1>Welcome to My TODO List</h1>
       <form> 
-        <input value={input} onChange={(e) => setInput(e.target.value)} type="text" />
+        <input value={input} onChange={e => setInput(e.target.value)} type="text" />
         <button type="submit" onClick={addTodo}>Add TODO</button>
       </form>
 
       <h2>List of TODOs:</h2>
-      {todos.map((todo, i) => (
+      {todos.map((task, i) => (
         <li key={i}>
-          {todo}
-          <button onClick={(e) => removeTodo({ e: e, currentToDo: todo})}>Delete</button>
+          {task}
+          <button onClick={() => removeTodo(task)}>Delete</button>
         </li>
       ))}  
     </div>
