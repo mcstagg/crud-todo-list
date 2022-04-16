@@ -50,10 +50,9 @@ const App = () => {
     setUpdateInput('');
   }
 
-  // TODO: Use index for deletions instead of task to prevent cascading deletes
   // DELETE - The ability to delete a todo from the todo list
-  const removeTodo = task => {
-    const removeItem = todos.filter(todo => todo !== task);
+  const removeTodo = i => {
+    const removeItem = todos.filter((todo, index) => index !== i);
     setTodos(removeItem);
   }
 
@@ -77,7 +76,7 @@ const App = () => {
             </>
           )}
           <button onClick={() => updateTodo(i)}>UPDATE</button>
-          <button onClick={() => removeTodo(task)}>DELETE</button>
+          <button onClick={() => removeTodo(i)}>DELETE</button>
         </li>
       ))}  
     </div>
