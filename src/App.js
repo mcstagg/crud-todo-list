@@ -1,16 +1,57 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
 
+// The CRUD Homework Assignment!
+
+// Your client requires a TODO list application, they have submitted a list of requirements. The application must have the following features:
+
 const App = () => {
+  const create = useRef(null);
+  // TODO: fix update button click input focus 
+  const update = useRef(null);
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
+  const [updateInput, setUpdateInput] = useState('');
+  const [updateClicked, setUpdateClicked] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(0);
 
+  // Focus on the CREATE input field on mount
+  useEffect(() => {
+    create.current.focus();
+  }, []);
+
+  // CREATE - The ability to type into an input field and hit the enter key to add a TODO to a list of TODO's
   const addTodo = e => {
     e.preventDefault();
     setTodos([...todos, input]);
     setInput(['']);
   }
 
+  // READ - See JSX return
+
+  // UPDATE - The ability to update a todo from the todo list
+  const updateTodo = i => {
+    // render edit input field & button onclick of update
+    setUpdateClicked(true);
+    // but only for the specifically selected task
+    setSelectedTask(i);
+    // gather input in JSX
+    // focus on the input field
+    update.current.focus();
+  }
+
+  const confirmEdit = (task, i) => {
+    // update the todo onclick or onsumbit
+    const newTodos = [...todos];
+    //newTodos.push(task);
+    newTodos.splice(i, 1, updateInput);
+    setTodos(newTodos);
+    setUpdateClicked(false);
+    setUpdateInput('');
+  }
+
+  // TODO: Use index for deletions instead of task to prevent cascading deletes
+  // DELETE - The ability to delete a todo from the todo list
   const removeTodo = task => {
     const removeItem = todos.filter(todo => todo !== task);
     setTodos(removeItem);
@@ -18,17 +59,25 @@ const App = () => {
 
   return (
     <div className="app">
-      <h1>Welcome to My TODO List</h1>
+      <h1>CRUD TODO LIST</h1>
       <form> 
-        <input value={input} onChange={e => setInput(e.target.value)} type="text" />
-        <button type="submit" onClick={addTodo}>Add TODO</button>
+        <input ref={create} value={input} onChange={e => setInput(e.target.value)} type="text" />
+        <button type="submit" onClick={addTodo}>CREATE</button>
       </form>
 
-      <h2>List of TODOs:</h2>
+      {/* READ */}
+      <h2>READ TODOs:</h2>
       {todos.map((task, i) => (
         <li key={i}>
           {task}
-          <button onClick={() => removeTodo(task)}>Delete</button>
+          {updateClicked === true && selectedTask === i && (
+            <>
+              <input ref={update} value={updateInput} onChange={e => setUpdateInput(e.target.value)} type="text"/>
+              <button onClick={() => confirmEdit(task, i)}>Confirm Edit</button> 
+            </>
+          )}
+          <button onClick={() => updateTodo(i)}>UPDATE</button>
+          <button onClick={() => removeTodo(task)}>DELETE</button>
         </li>
       ))}  
     </div>
