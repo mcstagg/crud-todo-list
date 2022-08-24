@@ -25,7 +25,8 @@ const App = () => {
   const [input, setInput] = useState('');
   const [updateInput, setUpdateInput] = useState('');
   const [updateClicked, setUpdateClicked] = useState(false);
-  //const [beingEdited, setBeingEdited] = useState(false);
+  // const [editDelete, setEditDelete] = useState(false);
+  const [cancelClicked, setCancelClicked] = useState(false);
   const [selectedTask, setSelectedTask] = useState(undefined);
 
   // Focus on the CREATE input field on mount/inital render only
@@ -57,6 +58,7 @@ const App = () => {
   // READ - See JSX return
 
   // UPDATE - The ability to update a todo from the todo list
+  // TODO: Add cancel edit functionality
   const updateTodo = i => {
     // remove current todo item from dom
     //setBeingEdited(true);
@@ -67,6 +69,7 @@ const App = () => {
     // gather input in JSX
     console.log(update);
     console.log(update.current);
+    // TODO: Have update button foucs to input field on inital click
     update.current.focus();
   }
 
@@ -84,9 +87,18 @@ const App = () => {
   }
 
   // DELETE - The ability to delete a todo from the todo list
+  // TODO: Debug update mode delete button functionality
   const removeTodo = i => {
     const removeItem = todos.filter((todo, index) => index !== i);
     setTodos(removeItem);
+    // setEditDelete(true);
+  }
+
+  // CANCEL EDIT - Cancels the editing process
+  const cancelEdit = i => {
+    setCancelClicked(false);
+    setUpdateClicked(false);
+    setSelectedTask(i);
   }
 
   return (
@@ -116,11 +128,18 @@ const App = () => {
                   {/* TODO: Add enter button submit functionality */}
                   <input ref={update} value={updateInput} onChange={e => setUpdateInput(e.target.value)} type="text"/>
                   <button onClick={() => confirmEdit(task, i)}>CONFIRM EDIT</button> 
+                  <button onClick={() => cancelEdit(task, i)}>CANCEL EDIT</button>
                 </>
               )}
-                <button onClick={() => updateTodo(i)}>UPDATE</button>
-                {/* TODO: Add button on each TODO to indicate completion of a TODO, the text should turn green and have a strikethrough once completed */}
-                <button onClick={() => removeTodo(i)}>DELETE</button>
+
+              {cancelClicked !== true && selectedTask !== i && (
+                <>
+                  <button onClick={() => updateTodo(i)}>UPDATE</button>
+                  {/* TODO: Add button on each TODO to indicate completion of a TODO, the text should turn green and have a strikethrough once completed */}
+                  {/* TODO: Debug delete button in update mode for wrong deletions */}
+                  <button onClick={() => removeTodo(i)}>DELETE</button>
+                </>
+              )}
             </li>
           ))}
         </div>
