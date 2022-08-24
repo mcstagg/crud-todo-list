@@ -80,6 +80,7 @@ const App = () => {
     setTodos(newTodos);
     setUpdateClicked(false);
     setUpdateInput('');
+    setSelectedTask(undefined);
   }
 
   // DELETE - The ability to delete a todo from the todo list
@@ -104,13 +105,13 @@ const App = () => {
           {todos.map((task, i) => (
             <li key={i} className='task-container'>
               {/* TODO: Replace task with input field with ph text on update click */}
-              {/* TODO: Replace task with input field only for selected task*/}
-              {updateClicked === false && (
+              {/* Show task only if its respective update button has NOT been clicked */}
+              {selectedTask !== i && (
                 <div className='task'>&bull;&nbsp;<p>{task}</p></div>
               )}
-              
+
               {/* Show update input field if update button is clicked */}
-              {updateClicked === true && (
+              {updateClicked === true && selectedTask === i && (
                 <>
                   {/* TODO: Add enter button submit functionality */}
                   <input ref={update} value={updateInput} onChange={e => setUpdateInput(e.target.value)} type="text"/>
