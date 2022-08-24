@@ -48,13 +48,14 @@ li {
 .task {
   width: 20em;
   display: flex;
+  padding-left: .5em;
 }
 
 button {
-  /* border-radius: .25em; */
+  width: 5em;
 }
 
 input {
-  width: 15em;
+  width: 24em;
   height: 1.25em;
 }

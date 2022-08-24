@@ -25,7 +25,6 @@ const App = () => {
   const [input, setInput] = useState('');
   const [updateInput, setUpdateInput] = useState('');
   const [updateClicked, setUpdateClicked] = useState(false);
-  // const [editDelete, setEditDelete] = useState(false);
   const [cancelClicked, setCancelClicked] = useState(false);
   const [selectedTask, setSelectedTask] = useState(undefined);
 
@@ -91,7 +90,6 @@ const App = () => {
   const removeTodo = i => {
     const removeItem = todos.filter((todo, index) => index !== i);
     setTodos(removeItem);
-    // setEditDelete(true);
   }
 
   // CANCEL EDIT - Cancels the editing process
@@ -122,13 +120,13 @@ const App = () => {
                 <div className='task'>&bull;&nbsp;<p>{task}</p></div>
               )}
 
-              {/* Show update input field if update button is clicked */}
+              {/* Show update input field only if update button is clicked and only for the currently selected task */}
               {updateClicked === true && selectedTask === i && (
                 <>
                   {/* TODO: Add enter button submit functionality */}
                   <input ref={update} value={updateInput} onChange={e => setUpdateInput(e.target.value)} type="text"/>
-                  <button onClick={() => confirmEdit(task, i)}>CONFIRM EDIT</button> 
-                  <button onClick={() => cancelEdit(task, i)}>CANCEL EDIT</button>
+                  <button onClick={() => confirmEdit(task, i)}>EDIT</button> 
+                  <button onClick={() => cancelEdit(task, i)}>CANCEL</button>
                 </>
               )}
 
