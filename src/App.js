@@ -48,6 +48,7 @@ const App = () => {
   const addTodo = e => {
     e.preventDefault();
     setTodos([...todos, input]);
+    console.log(todos);
     setInput(['']);
   }
 
