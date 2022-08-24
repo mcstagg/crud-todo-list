@@ -90,25 +90,27 @@ const App = () => {
 
   return (
     <div className="app">
-      <h1>CRUD To Do:</h1>
+      <h1><u>CRUD To Do:</u></h1>
       <form> 
-        {/* Set max length for task */}
         <input ref={create} value={input} onChange={e => setInput(e.target.value)} type="text" />
         <button type="submit" onClick={addTodo}>CREATE</button>
       </form>
 
       {/* READ */}
-      <h2>READ To Dos:</h2>
+      <h2><u>READ To Dos:</u></h2>
       <div id="main-container">
         <div id="todo-container">
           {/* TODO: I'm not sure using the index as the key is best practice. What else? */}
           {todos.map((task, i) => (
             <li key={i} className='task-container'>
               {/* TODO: Replace task with input field with ph text on update click */}
-              {/* TODO: Add space between the todo text and the buttons */}
-              <div className='task'>&bull;&nbsp;<p>{task}</p></div>
+              {/* TODO: Replace task with input field only for selected task*/}
+              {updateClicked === false && (
+                <div className='task'>&bull;&nbsp;<p>{task}</p></div>
+              )}
+              
               {/* Show update input field if update button is clicked */}
-              {updateClicked === true && selectedTask === i && (
+              {updateClicked === true && (
                 <>
                   {/* TODO: Add enter button submit functionality */}
                   <input ref={update} value={updateInput} onChange={e => setUpdateInput(e.target.value)} type="text"/>
