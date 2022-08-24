@@ -52,6 +52,8 @@ const App = () => {
     setInput(['']);
   }
 
+  console.log();
+
   // READ - See JSX return
 
   // UPDATE - The ability to update a todo from the todo list
@@ -88,31 +90,38 @@ const App = () => {
 
   return (
     <div className="app">
-      <h1>CRUD TODO LIST</h1>
+      <h1>CRUD To Do:</h1>
       <form> 
+        {/* Set max length for task */}
         <input ref={create} value={input} onChange={e => setInput(e.target.value)} type="text" />
         <button type="submit" onClick={addTodo}>CREATE</button>
       </form>
 
       {/* READ */}
-      <h2>READ TODOs:</h2>
-      {/* TODO: I'm not sure using the index as the key is best practice. What else? */}
-      {todos.map((task, i) => (
-        <li key={i}>
-          {/* TODO: Replace task with input field with ph text on update click */}
-          {task}
-          {updateClicked === true && selectedTask === i && (
-            <>
-              {/* TODO: Add enter button submit functionality */}
-              <input ref={update} value={updateInput} onChange={e => setUpdateInput(e.target.value)} type="text"/>
-              <button onClick={() => confirmEdit(task, i)}>CONFIRM EDIT</button> 
-            </>
-          )}
-          <button onClick={() => updateTodo(i)}>UPDATE</button>
-          {/* TODO: Add button on each TODO to indicate completion of a TODO, the text should turn green and have a strikethrough once completed */}
-          <button onClick={() => removeTodo(i)}>DELETE</button>
-        </li>
-      ))}  
+      <h2>READ To Dos:</h2>
+      <div id="main-container">
+        <div id="todo-container">
+          {/* TODO: I'm not sure using the index as the key is best practice. What else? */}
+          {todos.map((task, i) => (
+            <li key={i} className='task-container'>
+              {/* TODO: Replace task with input field with ph text on update click */}
+              {/* TODO: Add space between the todo text and the buttons */}
+              <div className='task'>&bull;&nbsp;<p>{task}</p></div>
+              {/* Show update input field if update button is clicked */}
+              {updateClicked === true && selectedTask === i && (
+                <>
+                  {/* TODO: Add enter button submit functionality */}
+                  <input ref={update} value={updateInput} onChange={e => setUpdateInput(e.target.value)} type="text"/>
+                  <button onClick={() => confirmEdit(task, i)}>CONFIRM EDIT</button> 
+                </>
+              )}
+                <button onClick={() => updateTodo(i)}>UPDATE</button>
+                {/* TODO: Add button on each TODO to indicate completion of a TODO, the text should turn green and have a strikethrough once completed */}
+                <button onClick={() => removeTodo(i)}>DELETE</button>
+            </li>
+          ))}
+        </div>
+      </div>  
     </div>
   )
 }
