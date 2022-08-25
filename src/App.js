@@ -18,15 +18,19 @@ import './App.css';
 // TODO: The client requests that the code is submitted to Github for review, once you have done this, fill this form to send the assignment to the client!
 
 const App = () => {
+
+  // Variables
   const create = useRef(null);
-  // TODO: fix update button click input focus 
   const update = useRef(null);
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
+  const [style, setStyle] = useState("cont");
   const [updateInput, setUpdateInput] = useState('');
   const [updateClicked, setUpdateClicked] = useState(false);
   const [cancelClicked, setCancelClicked] = useState(false);
   const [selectedTask, setSelectedTask] = useState(undefined);
+  const [selectedStyle, setSelectedStyle] = useState(undefined);
+  const [isActive, setIsActive] = useState(false);
 
   // Focus on the CREATE input field on mount/inital render only
   useEffect(() => {
@@ -52,15 +56,11 @@ const App = () => {
     setInput(['']);
   }
 
-  console.log();
-
   // READ - See JSX return
 
   // UPDATE - The ability to update a todo from the todo list
-  // TODO: Add cancel edit functionality
   const updateTodo = i => {
     // remove current todo item from dom
-    //setBeingEdited(true);
     // render edit input field & button onclick of update
     setUpdateClicked(true);
     // but only for the specifically selected task
@@ -72,9 +72,9 @@ const App = () => {
     update.current.focus();
   }
 
+  // CONFIRM EDIT - Confirms the edit and ends the editing process
   const confirmEdit = (task, i) => {
     // add edited todo back to the dom
-    //setBeingEdited(false);
     // update the todo onclick or onsumbit
     const newTodos = [...todos];
     //newTodos.push(task);
@@ -86,7 +86,6 @@ const App = () => {
   }
 
   // DELETE - The ability to delete a todo from the todo list
-  // TODO: Debug update mode delete button functionality
   const removeTodo = i => {
     const removeItem = todos.filter((todo, index) => index !== i);
     setTodos(removeItem);
@@ -99,7 +98,21 @@ const App = () => {
     setSelectedTask(i);
   }
 
+  // Change styling onclick
+  const changeStyle = (i) => {
+
+    console.log("you just clicked");
+    setIsActive(true);
+
+    if (style === "cont") {
+      setStyle("cont2");
+    } else {
+      setStyle("cont")
+    }
+  };
+
   return (
+    // CREATE
     <div className="app">
       <h1><u>CRUD To Do:</u></h1>
       <form> 
@@ -111,30 +124,49 @@ const App = () => {
       <h2><u>READ To Dos:</u></h2>
       <div id="main-container">
         <div id="todo-container">
-          {/* TODO: I'm not sure using the index as the key is best practice. What else? */}
+          {/* TODO: Refactor to use ID as the key instead of the Index */}
           {todos.map((task, i) => (
             <li key={i} className='task-container'>
               {/* TODO: Replace task with input field with ph text on update click */}
               {/* Show task only if its respective update button has NOT been clicked */}
               {selectedTask !== i && (
-                <div className='task'>&bull;&nbsp;<p>{task}</p></div>
+                <div className='task'>
+                  &bull;&nbsp;
+                  {/* TODO: Add click functionality to indicate completion of a TODO, the text should turn green and have a strikethrough once completed */}
+                  <p className={style} 
+                     onClick={() => changeStyle(i)}
+                  >
+                    {task}
+                  </p>
+                </div>
               )}
 
-              {/* Show update input field only if update button is clicked and only for the currently selected task */}
+              {/* Show update input field ONLY if update button is clicked and ONLY for the currently selected task */}
               {updateClicked === true && selectedTask === i && (
                 <>
-                  {/* TODO: Add enter button submit functionality */}
-                  <input ref={update} value={updateInput} onChange={e => setUpdateInput(e.target.value)} type="text"/>
+                  <input
+                    // Enter button submit functionality for update input field
+                    onKeyPress={(ev) => {
+                      if (ev.key === "Enter") {
+                      ev.preventDefault();
+                      console.log(ev.target.value);
+                      confirmEdit(task, i)
+                      }
+                    }}
+                    ref={update} 
+                    value={updateInput} 
+                    onChange={e => setUpdateInput(e.target.value)} 
+                    type="text"
+                  />
                   <button onClick={() => confirmEdit(task, i)}>EDIT</button> 
                   <button onClick={() => cancelEdit(task, i)}>CANCEL</button>
                 </>
               )}
 
+              {/* Show update and delete buttons only if NOT in edit mode */}
               {cancelClicked !== true && selectedTask !== i && (
                 <>
                   <button onClick={() => updateTodo(i)}>UPDATE</button>
-                  {/* TODO: Add button on each TODO to indicate completion of a TODO, the text should turn green and have a strikethrough once completed */}
-                  {/* TODO: Debug delete button in update mode for wrong deletions */}
                   <button onClick={() => removeTodo(i)}>DELETE</button>
                 </>
               )}

@@ -45,6 +45,10 @@ li {
   text-align: left;
 }
 
+p {
+  cursor: pointer;
+}
+
 .task {
   width: 20em;
   display: flex;
@@ -53,9 +57,19 @@ li {
 
 button {
   width: 5em;
+  cursor: pointer;
 }
 
 input {
   width: 24em;
   height: 1.25em;
+}
+
+.cont {
+  color: black;
+}
+
+.cont2 {
+  color: green;
+  text-decoration: line-through;
 }
