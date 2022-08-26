@@ -32,13 +32,10 @@ const App = () => {
   const update = useRef(null);
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
-  const [style, setStyle] = useState("unchecked");
   const [updateInput, setUpdateInput] = useState('');
   const [updateClicked, setUpdateClicked] = useState(false);
   const [cancelClicked, setCancelClicked] = useState(false);
   const [selectedTask, setSelectedTask] = useState(undefined);
-  const [selectedStyle, setSelectedStyle] = useState(undefined);
-  const [isActive, setIsActive] = useState(false);
   const [completedTasks, setCompletedTasks] = useState([]);
 
   // Focus on the CREATE input field on mount/inital render only
@@ -47,14 +44,6 @@ const App = () => {
     console.log(create.current);
     create.current.focus();
   }, []);
-
-  // // Listen for update button click event and focus the curosr in the update input field
-  // useEffect(() => {
-  //   const pointer = update.current;
-  //   return () => {
-  //     pointer.focus();
-  //   }
-  // }, [update])
 
   // CREATE - The ability to type into an input field and hit the enter key to add a TODO to a list of TODO's
   // Auto Capitalize the first letter of each todo
@@ -102,13 +91,16 @@ const App = () => {
     setTodos(removeItem);
   }
 
-  // TODO: Change styling for task in TODO list onClick to show completion of task
+  // MARK COMPLETED - Changes the styling of a specific todo item if it is clicked to 
+  // signify that the task has been completed and can be crossed off the list or 
+  // conversly can be uncrossed off the list if there is still more to be done
   const markCompleted = (i) => {
-
-    console.log("you just clicked");
-    console.log(i);
-
-    
+    if (completedTasks.includes(i)) {
+      const removeTask = completedTasks.filter((index) => index !== i);
+      setCompletedTasks(removeTask);
+    } else {
+      setCompletedTasks([...completedTasks, i])
+    }
   };
 
   return (
@@ -133,21 +125,10 @@ const App = () => {
               {selectedTask !== i && (
                 <div className='task'>
                   &bull;&nbsp;
-                  {/* TODO: Add click functionality to indicate completion of a TODO, the text should turn green and have a strikethrough once completed */}
-                <p 
-                  className={completedTasks.includes(i) ? "checked" : "unchecked"}
-                  onClick={(e) => {
-                    
-                    if (completedTasks.includes(i)) {
-                      const removeTask = completedTasks.filter((index) => index !== i);
-                      setCompletedTasks(removeTask);
-                    } else {
-                      setCompletedTasks([...completedTasks, i])
-                    }
-                       
-                    //  markedCompleted(i);   
-                  }}
-                >
+                  <p 
+                    className={completedTasks.includes(i) ? "checked" : "unchecked"}
+                    onClick={() => {markCompleted(i)}}
+                  >
                     {task}
                   </p>
                 </div>
