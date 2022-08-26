@@ -40,18 +40,18 @@ const App = () => {
 
   // Focus on the CREATE input field on mount/inital render only
   useEffect(() => {
-    console.log(create);
-    console.log(create.current);
     create.current.focus();
   }, []);
 
-  // CREATE - The ability to type into an input field and hit the enter key to add a TODO to a list of TODO's
-  // Auto Capitalize the first letter of each todo
+  // CREATE - Adds a todo to the todos array if the string in not empty. The todo is 
+  // automatically capitalized and the input field is reset and refocused.
   const addTodo = e => {
     e.preventDefault();
-    setTodos([...todos, input.charAt(0).toLocaleUpperCase() + input.slice(1)]);
-    console.log(todos);
+    if (input != '') {
+      setTodos([...todos, input.charAt(0).toLocaleUpperCase() + input.slice(1)]);
+    }   
     setInput(['']);
+    create.current.focus();
   }
 
   // READ - See JSX return
