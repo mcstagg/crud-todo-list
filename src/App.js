@@ -21,8 +21,6 @@ import './App.css';
 
 // TODO: Warning: ReactDOM.render is no longer supported in React 18. Use createRoot instead.
 
-// TODO: App.js:76 Uncaught TypeError: Cannot read properties of null (reading 'focus')
-
 const App = () => {
 
   // Variables
@@ -54,10 +52,10 @@ const App = () => {
   // }, [update])
 
   // CREATE - The ability to type into an input field and hit the enter key to add a TODO to a list of TODO's
-  // TODO: Auto Capitalize the first letter of each todo
+  // Auto Capitalize the first letter of each todo
   const addTodo = e => {
     e.preventDefault();
-    setTodos([...todos, input]);
+    setTodos([...todos, input.charAt(0).toLocaleUpperCase() + input.slice(1)]);
     console.log(todos);
     setInput(['']);
   }
@@ -66,10 +64,11 @@ const App = () => {
 
   // UPDATE - The ability to update a todo from the todo list
   // Async funtion to await update of state variables for input focus
-  const updateTodo = async (i) => {
+  const updateTodo = async (task, i) => {
     await setUpdateClicked(true);
     // but only for the specifically selected task
     await setSelectedTask(i);
+    await setUpdateInput(task);
     // gather input in JSX
     console.log(update);
     console.log(update.current);
@@ -82,7 +81,7 @@ const App = () => {
     // update the todo onclick or onsumbit
     const newTodos = [...todos];
     //newTodos.push(task);
-    newTodos.splice(i, 1, updateInput);
+    newTodos.splice(i, 1, updateInput.charAt(0).toLocaleUpperCase() + updateInput.slice(1));
     setTodos(newTodos);
     setUpdateClicked(false);
     setUpdateInput('');
@@ -130,7 +129,9 @@ const App = () => {
         <div id="todo-container">
           {/* TODO: Refactor to use ID as the key instead of the Index */}
           {todos.map((task, i) => (
+
             <li key={i} className='task-container'>
+              
               {/* Show task only if its respective update button has NOT been clicked */}
               {selectedTask !== i && (
                 <div className='task'>
@@ -158,7 +159,7 @@ const App = () => {
                         console.log(task);
                       }
                     }}
-                    placeholder={task}
+                    // placeholder={task}
                     ref={update} 
                     value={updateInput} 
                     onChange={e => setUpdateInput(e.target.value)} 
@@ -172,7 +173,7 @@ const App = () => {
               {/* Show update and delete buttons only if NOT in edit mode */}
               {cancelClicked !== true && selectedTask !== i && (
                 <>
-                  <button onClick={() => updateTodo(i)}>UPDATE</button>
+                  <button onClick={() => updateTodo(task, i)}>UPDATE</button>
                   <button onClick={() => removeTodo(i)}>DELETE</button>
                 </>
               )}
