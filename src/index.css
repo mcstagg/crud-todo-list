@@ -66,12 +66,12 @@ input {
   height: 1.25em;
 }
 
-.cont {
+.unchecked {
   color: black;
   padding-left: .17em;
 }
 
-.cont2 {
+.checked {
   color: green;
   text-decoration: line-through;
   padding-left: .17em;

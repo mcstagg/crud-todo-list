@@ -11,11 +11,15 @@ import './App.css';
 
 // TODO: Refactor the app and break it up into components
 
-// TODO: CHALLENGE 1: Persist the TODO's so that when the user refreshes the page, the list of TODO's is preserved!
+// TODO: CHALLENGE 1: Persist the TODO's locally so that when the user refreshes the page, the list of TODO's is preserved!
 
 // TODO: CHALLENGE 2: Add animations to the TODO list using this library!
 
 // TODO: The client requests that the code is submitted to Github for review, once you have done this, fill this form to send the assignment to the client!
+
+// TODO: Add TypeScpit throughout application
+
+// TODO: Set up a MERN stack and persist the TODO's remotely that when the user refreshes the page, the list of TODO's is preserved!
 
 // Console warnings/errors
 
@@ -28,13 +32,14 @@ const App = () => {
   const update = useRef(null);
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
-  const [style, setStyle] = useState("cont");
+  const [style, setStyle] = useState("unchecked");
   const [updateInput, setUpdateInput] = useState('');
   const [updateClicked, setUpdateClicked] = useState(false);
   const [cancelClicked, setCancelClicked] = useState(false);
   const [selectedTask, setSelectedTask] = useState(undefined);
   const [selectedStyle, setSelectedStyle] = useState(undefined);
   const [isActive, setIsActive] = useState(false);
+  const [completedTasks, setCompletedTasks] = useState([]);
 
   // Focus on the CREATE input field on mount/inital render only
   useEffect(() => {
@@ -62,16 +67,12 @@ const App = () => {
 
   // READ - See JSX return
 
-  // UPDATE - The ability to update a todo from the todo list
-  // Async funtion to await update of state variables for input focus
+  // UPDATE - Updates a todo from the todo list in edit mode
+  // Async funtion awaits update of state variables for input focus onClick
   const updateTodo = async (task, i) => {
     await setUpdateClicked(true);
-    // but only for the specifically selected task
     await setSelectedTask(i);
     await setUpdateInput(task);
-    // gather input in JSX
-    console.log(update);
-    console.log(update.current);
     update.current.focus();
   }
 
@@ -88,12 +89,6 @@ const App = () => {
     setSelectedTask(undefined);
   }
 
-  // DELETE - The ability to delete a todo from the todo list
-  const removeTodo = i => {
-    const removeItem = todos.filter((todo, index) => index !== i);
-    setTodos(removeItem);
-  }
-
   // CANCEL EDIT - Cancels the editing process
   const cancelEdit = i => {
     setCancelClicked(false);
@@ -101,17 +96,19 @@ const App = () => {
     setSelectedTask(i);
   }
 
-  // Change styling onclick
-  const changeStyle = (i) => {
+  // DELETE - The ability to delete a todo from the todo list
+  const removeTodo = i => {
+    const removeItem = todos.filter((todo, index) => index !== i);
+    setTodos(removeItem);
+  }
+
+  // TODO: Change styling for task in TODO list onClick to show completion of task
+  const markCompleted = (i) => {
 
     console.log("you just clicked");
-    setIsActive(true);
+    console.log(i);
 
-    if (style === "cont") {
-      setStyle("cont2");
-    } else {
-      setStyle("cont")
-    }
+    
   };
 
   return (
@@ -137,9 +134,20 @@ const App = () => {
                 <div className='task'>
                   &bull;&nbsp;
                   {/* TODO: Add click functionality to indicate completion of a TODO, the text should turn green and have a strikethrough once completed */}
-                  <p className={style} 
-                     onClick={() => changeStyle(i)}
-                  >
+                <p 
+                  className={completedTasks.includes(i) ? "checked" : "unchecked"}
+                  onClick={(e) => {
+                    
+                    if (completedTasks.includes(i)) {
+                      const removeTask = completedTasks.filter((index) => index !== i);
+                      setCompletedTasks(removeTask);
+                    } else {
+                      setCompletedTasks([...completedTasks, i])
+                    }
+                       
+                    //  markedCompleted(i);   
+                  }}
+                >
                     {task}
                   </p>
                 </div>
