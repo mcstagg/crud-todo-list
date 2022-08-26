@@ -17,6 +17,12 @@ import './App.css';
 
 // TODO: The client requests that the code is submitted to Github for review, once you have done this, fill this form to send the assignment to the client!
 
+// Console warnings/errors
+
+// TODO: Warning: ReactDOM.render is no longer supported in React 18. Use createRoot instead.
+
+// TODO: App.js:76 Uncaught TypeError: Cannot read properties of null (reading 'focus')
+
 const App = () => {
 
   // Variables
@@ -59,16 +65,14 @@ const App = () => {
   // READ - See JSX return
 
   // UPDATE - The ability to update a todo from the todo list
-  const updateTodo = i => {
-    // remove current todo item from dom
-    // render edit input field & button onclick of update
-    setUpdateClicked(true);
+  // Async funtion to await update of state variables for input focus
+  const updateTodo = async (i) => {
+    await setUpdateClicked(true);
     // but only for the specifically selected task
-    setSelectedTask(i);
+    await setSelectedTask(i);
     // gather input in JSX
     console.log(update);
     console.log(update.current);
-    // TODO: Have update button foucs to input field on inital click
     update.current.focus();
   }
 
@@ -127,7 +131,6 @@ const App = () => {
           {/* TODO: Refactor to use ID as the key instead of the Index */}
           {todos.map((task, i) => (
             <li key={i} className='task-container'>
-              {/* TODO: Replace task with input field with ph text on update click */}
               {/* Show task only if its respective update button has NOT been clicked */}
               {selectedTask !== i && (
                 <div className='task'>
@@ -144,15 +147,18 @@ const App = () => {
               {/* Show update input field ONLY if update button is clicked and ONLY for the currently selected task */}
               {updateClicked === true && selectedTask === i && (
                 <>
+                  <p>&nbsp;&bull;&nbsp;</p>
                   <input
                     // Enter button submit functionality for update input field
                     onKeyPress={(ev) => {
                       if (ev.key === "Enter") {
-                      ev.preventDefault();
-                      console.log(ev.target.value);
-                      confirmEdit(task, i)
+                        ev.preventDefault();
+                        console.log(ev.target.value);
+                        confirmEdit(task, i);
+                        console.log(task);
                       }
                     }}
+                    placeholder={task}
                     ref={update} 
                     value={updateInput} 
                     onChange={e => setUpdateInput(e.target.value)} 

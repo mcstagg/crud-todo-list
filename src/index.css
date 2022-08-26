@@ -52,24 +52,27 @@ p {
 .task {
   width: 20em;
   display: flex;
-  padding-left: .5em;
+  padding-left: .27em;
 }
 
 button {
   width: 5em;
   cursor: pointer;
+  height: 1.75em;
 }
 
 input {
-  width: 24em;
+  width: 22.555em;
   height: 1.25em;
 }
 
 .cont {
   color: black;
+  padding-left: .17em;
 }
 
 .cont2 {
   color: green;
   text-decoration: line-through;
+  padding-left: .17em;
 }
