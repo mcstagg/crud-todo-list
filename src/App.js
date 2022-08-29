@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
+import Quote from './Quote';
 
 // The CRUD Homework Assignment!
 
 // Your client requires a TODO list application, they have submitted a list of requirements. The application must have the following features:
 
 // TODO: The TODO app should be styled appropriately (you could use Glassmorphism!)
-
-// TODO: At the top of the page, the client wants an inspirational quote which is different each time the user refreshes the page. The quote should be fetched from the following API: https://type.fit/api/quotes
 
 // TODO: Refactor the app and break it up into components
 
@@ -106,6 +105,7 @@ const App = () => {
   return (
     // CREATE
     <div className="app">
+      <Quote />
       <h1><u>CRUD To Do:</u></h1>
       <form> 
         <input ref={create} value={input} onChange={e => setInput(e.target.value)} type="text" />
@@ -143,9 +143,7 @@ const App = () => {
                     onKeyPress={(ev) => {
                       if (ev.key === "Enter") {
                         ev.preventDefault();
-                        console.log(ev.target.value);
                         confirmEdit(task, i);
-                        console.log(task);
                       }
                     }}
                     // placeholder={task}

@@ -28,6 +28,10 @@ h2 {
   margin: 1em;
 }
 
+h3 {
+  margin: 1em;
+}
+
 #main-container {
   display: flex;
   justify-content: center;
