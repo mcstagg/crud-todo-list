@@ -80,3 +80,8 @@ input {
   text-decoration: line-through;
   padding-left: .17em;
 }
+
+.quote {
+  padding-left: 2em;
+  padding-right: 2em;
+}

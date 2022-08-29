@@ -1,14 +1,15 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-// TODO: At the top of the page, the client wants an inspirational quote which 
-//is different each time the user refreshes the page. The quote should be fetched 
-//from the following API: https://type.fit/api/quotes
+// At the top of the page, the client wants an inspirational quote which 
+// is different each time the user refreshes the page. The quote should be fetched 
+// from the following API: https://type.fit/api/quotes
 
 const Quote = () => {
 
-  const [data, setData] = useState([]);
-  const [quotes, setQuotes] = useState([]);
+  const [quote, setQuote] = useState('');
+  const [author, setAuthor] = useState('');
 
   useEffect(() => {
   
@@ -16,23 +17,20 @@ const Quote = () => {
     
   }, [])
 
-  const fetchQuote = async () => {
-    await fetch("https://type.fit/api/quotes")
-      .then((res) => res.json())
-      .then((data) => {
-        //console.log(`Fetched Data: ${JSON.stringify(data)}`);
-        setData(data);
-    });
+  const fetchQuote = () => {
+    axios.get("https://type.fit/api/quotes")
+      .then(res => {
+        //console.log(res);
+        const randomIndex = Math.floor(Math.random() * 1644);
+        setQuote(res.data[randomIndex].text);
+        setAuthor(res.data[randomIndex].author);
+    })
   };
 
   return (
     <div>
-      <h3>Quote</h3>
-      {data.map((quote, i) => {
-        return (
-          <li key={i}>{quote.text}</li>
-        ) 
-      })}
+      <h3>Daily Inspiration:</h3>
+      <p className='quote'><i>"{quote}"</i> <b>-{author}</b></p>
     </div>
   )
 }
