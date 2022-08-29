@@ -21,14 +21,18 @@ code {
 }
 
 h1 {
-  margin: 1em;
+  margin: .5em;
 }
 
 h2 {
-  margin: 1em;
+  margin: .75em;
 }
 
 h3 {
+  margin: 1em;
+}
+
+h5 { 
   margin: 1em;
 }
 
@@ -51,6 +55,7 @@ li {
 
 p {
   cursor: pointer;
+  padding-top: .08em;
 }
 
 .task {
