@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -29,7 +29,7 @@ const Quote = () => {
 
   return (
     <div>
-      <h3>Daily Inspiration:</h3>
+      <h5>Daily Inspiration:</h5>
       <p className='quote'><i>"{quote}"</i> <b>-{author}</b></p>
     </div>
   )

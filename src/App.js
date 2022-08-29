@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
+import Create from './Create';
 import Quote from './Quote';
 
 // The CRUD Homework Assignment!
@@ -103,15 +104,13 @@ const App = () => {
   };
 
   return (
-    // CREATE
     <div className="app">
       <Quote />
-      <h1><u>CRUD To Do:</u></h1>
-      <form> 
-        <input ref={create} value={input} onChange={e => setInput(e.target.value)} type="text" />
-        <button type="submit" onClick={addTodo}>CREATE</button>
-      </form>
-
+      <Create create={create} 
+              input={input} 
+              setInput={setInput} 
+              addTodo={addTodo}
+      />
       {/* READ */}
       <h2><u>READ To Dos:</u></h2>
       <div id="main-container">
