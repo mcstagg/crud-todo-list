@@ -1,23 +1,15 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
-function Read(
-    { todos, 
-      selectedTask, 
-      completedTasks, 
-      markCompleted, 
-      updateClicked,
-      confirmEdit, 
-      updateInput,
-      setUpdateInput,
-      cancelEdit,
-      cancelClicked,
-      removeTodo,
-      setSelectedTask,
-      setUpdateClicked
-    }){
+function Read({ todos, setTodos }) {
 
   // VARIABLES
   const update = useRef(null);
+
+  const [updateInput, setUpdateInput] = useState('');
+  const [updateClicked, setUpdateClicked] = useState(false);
+  const [cancelClicked, setCancelClicked] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(undefined);
+  const [completedTasks, setCompletedTasks] = useState([]);
 
   // UPDATE - Updates a todo from the todo list in edit mode
   // Async funtion awaits update of state variables for input focus onClick
@@ -27,6 +19,44 @@ function Read(
     await setUpdateInput(task);
     update.current.focus();
   }
+
+  // CONFIRM EDIT - Confirms the edit and ends the editing process
+  const confirmEdit = (task, i) => {
+    // add edited todo back to the dom
+    // update the todo onclick or onsumbit
+    const newTodos = [...todos];
+    //newTodos.push(task);
+    newTodos.splice(i, 1, updateInput.charAt(0).toLocaleUpperCase() + updateInput.slice(1));
+    setTodos(newTodos);
+    setUpdateClicked(false);
+    setUpdateInput('');
+    setSelectedTask(undefined);
+  }
+
+  // CANCEL EDIT - Cancels the editing process
+  const cancelEdit = i => {
+    setCancelClicked(false);
+    setUpdateClicked(false);
+    setSelectedTask(i);
+  }
+
+  // DELETE - The ability to delete a todo from the todo list
+  const removeTodo = i => {
+    const removeItem = todos.filter((todo, index) => index !== i);
+    setTodos(removeItem);
+  }
+
+  // MARK COMPLETED - Changes the styling of a specific todo item if it is clicked to 
+  // signify that the task has been completed and can be crossed off the list or 
+  // conversly can be uncrossed off the list if there is still more to be done
+  const markCompleted = (i) => {
+    if (completedTasks.includes(i)) {
+      const removeTask = completedTasks.filter((index) => index !== i);
+      setCompletedTasks(removeTask);
+    } else {
+      setCompletedTasks([...completedTasks, i])
+    }
+  };
 
   return (
     <div>
