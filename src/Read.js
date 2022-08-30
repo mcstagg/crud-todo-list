@@ -1,15 +1,17 @@
 import React, { useRef, useState } from 'react';
+import ShowTodo from './ShowTodo';
 
 function Read({ todos, setTodos }) {
 
+  // TODO: Refactor the app and break it up into components
+
   // VARIABLES
   const update = useRef(null);
+  const [selectedTask, setSelectedTask] = useState(undefined);
 
   const [updateInput, setUpdateInput] = useState('');
   const [updateClicked, setUpdateClicked] = useState(false);
   const [cancelClicked, setCancelClicked] = useState(false);
-  const [selectedTask, setSelectedTask] = useState(undefined);
-  const [completedTasks, setCompletedTasks] = useState([]);
 
   // UPDATE - Updates a todo from the todo list in edit mode
   // Async funtion awaits update of state variables for input focus onClick
@@ -46,18 +48,6 @@ function Read({ todos, setTodos }) {
     setTodos(removeItem);
   }
 
-  // MARK COMPLETED - Changes the styling of a specific todo item if it is clicked to 
-  // signify that the task has been completed and can be crossed off the list or 
-  // conversly can be uncrossed off the list if there is still more to be done
-  const markCompleted = (i) => {
-    if (completedTasks.includes(i)) {
-      const removeTask = completedTasks.filter((index) => index !== i);
-      setCompletedTasks(removeTask);
-    } else {
-      setCompletedTasks([...completedTasks, i])
-    }
-  };
-
   return (
     <div>
       <h2><u>READ To Dos:</u></h2>
@@ -70,15 +60,7 @@ function Read({ todos, setTodos }) {
               
               {/* Show task only if its respective update button has NOT been clicked */}
               {selectedTask !== i && (
-                <div className='task'>
-                  &bull;&nbsp;
-                  <p 
-                    className={completedTasks.includes(i) ? "checked" : "unchecked"}
-                    onClick={() => {markCompleted(i)}}
-                  >
-                    {task}
-                  </p>
-                </div>
+                <ShowTodo task={task} i={i} />
               )}
 
               {/* Show update input field ONLY if update button is clicked and ONLY for the currently selected task */}

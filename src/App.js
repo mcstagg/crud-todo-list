@@ -10,8 +10,6 @@ import Read from './Read';
 
 // TODO: The TODO app should be styled appropriately (you could use Glassmorphism!)
 
-// TODO: Refactor the app and break it up into components
-
 // TODO: Refactor and break css up into component specific modules
 
 // TODO: CHALLENGE 1: Persist the TODO's locally so that when the user refreshes the page, the list of TODO's is preserved!
@@ -30,7 +28,7 @@ import Read from './Read';
 
 const App = () => {
 
-  // Variables
+  // VARIABLES
   const [todos, setTodos] = useState([]);
 
   return (
