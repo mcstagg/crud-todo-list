@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import './App.css';
 import Quote from './Quote';
 import Create from './Create';
@@ -31,10 +31,9 @@ import Read from './Read';
 const App = () => {
 
   // Variables
-  // const create = useRef(null);
-  const update = useRef(null);
   const [todos, setTodos] = useState([]);
-  const [input, setInput] = useState('');
+
+  const update = useRef(null);
   const [updateInput, setUpdateInput] = useState('');
   const [updateClicked, setUpdateClicked] = useState(false);
   const [cancelClicked, setCancelClicked] = useState(false);
@@ -93,20 +92,18 @@ const App = () => {
   return (
     <div className="app">
       <Quote />
-      <Create input={input} 
-              setInput={setInput}
-              todos={todos}
+      <Create todos={todos}
               setTodos={setTodos}
       />
       <Read todos={todos}
+            updateInput={updateInput}
+            setUpdateInput={setUpdateInput}
             selectedTask={selectedTask}
             completedTasks={completedTasks}
             markCompleted={markCompleted}
             updateClicked={updateClicked}
             confirmEdit={confirmEdit}
             update={update}
-            updateInput={updateInput}
-            setUpdateInput={setUpdateInput}
             cancelEdit={cancelEdit}
             cancelClicked={cancelClicked}
             updateTodo={updateTodo}

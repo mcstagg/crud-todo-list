@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
-function Create({ input, setInput, todos, setTodos }) {
+function Create({ todos, setTodos }) {
 
   // Variables
   const create = useRef(null);
+  const [input, setInput] = useState('');
 
   // Focus on the CREATE input field on mount/inital render only
   useEffect(() => {
