@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import Delete from './Delete';
 import ShowTodo from './ShowTodo';
 import Update from './Update';
 
@@ -21,19 +22,6 @@ function Read({ todos, setTodos }) {
     await setSelectedTask(i);
     await setUpdateInput(task);
     update.current.focus();
-  }
-
-  // CONFIRM EDIT - Confirms the edit and ends the editing process
-  const confirmEdit = (task, i) => {
-    // add edited todo back to the dom
-    // update the todo onclick or onsumbit
-    const newTodos = [...todos];
-    //newTodos.push(task);
-    newTodos.splice(i, 1, updateInput.charAt(0).toLocaleUpperCase() + updateInput.slice(1));
-    setTodos(newTodos);
-    setUpdateClicked(false);
-    setUpdateInput('');
-    setSelectedTask(undefined);
   }
 
   // CANCEL EDIT - Cancels the editing process
@@ -67,22 +55,22 @@ function Read({ todos, setTodos }) {
               {/* Show update input field ONLY if update button is clicked and ONLY for the currently selected task */}
               {updateClicked === true && selectedTask === i && (
                 <Update 
-                  confirmEdit={confirmEdit}
                   update={update}
                   updateInput={updateInput}
                   setUpdateInput={setUpdateInput}
                   cancelEdit={cancelEdit}
                   task={task}
                   i={i}
+                  todos={todos}
+                  setTodos={setTodos}
+                  setSelectedTask={setSelectedTask}
+                  setUpdateClicked={setUpdateClicked}
                 />
               )}
 
               {/* Show update and delete buttons only if NOT in edit mode */}
               {cancelClicked !== true && selectedTask !== i && (
-                <>
-                  <button onClick={() => updateTodo(task, i)}>UPDATE</button>
-                  <button onClick={() => removeTodo(i)}>DELETE</button>
-                </>
+                <Delete task={task} i={i} updateTodo={updateTodo} removeTodo={removeTodo} />
               )}
             </li>
           ))}

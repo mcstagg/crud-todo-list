@@ -20,7 +20,7 @@ const Quote = () => {
   const fetchQuote = () => {
     axios.get("https://type.fit/api/quotes")
       .then(res => {
-        //console.log(res);
+        console.log(res);
         const randomIndex = Math.floor(Math.random() * 1644);
         setQuote(res.data[randomIndex].text);
         setAuthor(res.data[randomIndex].author);

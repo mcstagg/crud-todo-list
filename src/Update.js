@@ -1,6 +1,30 @@
 import React from 'react';
 
-function Update({ confirmEdit, update, updateInput, setUpdateInput, cancelEdit, task, i }) {
+function Update({  
+    update, 
+    updateInput, 
+    setUpdateInput, 
+    cancelEdit, 
+    task, 
+    i,
+    todos,
+    setTodos,
+    setSelectedTask,
+    setUpdateClicked }) {
+  
+  // CONFIRM EDIT - Confirms the edit and ends the editing process
+  const confirmEdit = (task, i) => {
+    // add edited todo back to the dom
+    // update the todo onclick or onsumbit
+    const newTodos = [...todos];
+    //newTodos.push(task);
+    newTodos.splice(i, 1, updateInput.charAt(0).toLocaleUpperCase() + updateInput.slice(1));
+    setTodos(newTodos);
+    setUpdateClicked(false);
+    setUpdateInput('');
+    setSelectedTask(undefined);
+  }
+
   return (
     <>
       <p>&nbsp;&bull;&nbsp;</p>
