@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import ShowTodo from './ShowTodo';
+import Update from './Update';
 
 function Read({ todos, setTodos }) {
 
@@ -65,25 +66,15 @@ function Read({ todos, setTodos }) {
 
               {/* Show update input field ONLY if update button is clicked and ONLY for the currently selected task */}
               {updateClicked === true && selectedTask === i && (
-                <>
-                  <p>&nbsp;&bull;&nbsp;</p>
-                  <input
-                    // Enter button submit functionality for update input field
-                    onKeyPress={(ev) => {
-                      if (ev.key === "Enter") {
-                        ev.preventDefault();
-                        confirmEdit(task, i);
-                      }
-                    }}
-                    // placeholder={task}
-                    ref={update} 
-                    value={updateInput} 
-                    onChange={e => setUpdateInput(e.target.value)} 
-                    type="text"
-                  />
-                  <button onClick={() => confirmEdit(task, i)}>EDIT</button> 
-                  <button onClick={() => cancelEdit(task, i)}>CANCEL</button>
-                </>
+                <Update 
+                  confirmEdit={confirmEdit}
+                  update={update}
+                  updateInput={updateInput}
+                  setUpdateInput={setUpdateInput}
+                  cancelEdit={cancelEdit}
+                  task={task}
+                  i={i}
+                />
               )}
 
               {/* Show update and delete buttons only if NOT in edit mode */}
