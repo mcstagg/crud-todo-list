@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 function Read(
     { todos, 
@@ -7,14 +7,27 @@ function Read(
       markCompleted, 
       updateClicked,
       confirmEdit, 
-      update,
       updateInput,
       setUpdateInput,
       cancelEdit,
       cancelClicked,
-      updateTodo,
-      removeTodo
+      removeTodo,
+      setSelectedTask,
+      setUpdateClicked
     }){
+
+  // VARIABLES
+  const update = useRef(null);
+
+  // UPDATE - Updates a todo from the todo list in edit mode
+  // Async funtion awaits update of state variables for input focus onClick
+  const updateTodo = async (task, i) => {
+    await setUpdateClicked(true);
+    await setSelectedTask(i);
+    await setUpdateInput(task);
+    update.current.focus();
+  }
+
   return (
     <div>
       <h2><u>READ To Dos:</u></h2>

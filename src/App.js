@@ -33,7 +33,6 @@ const App = () => {
   // Variables
   const [todos, setTodos] = useState([]);
 
-  const update = useRef(null);
   const [updateInput, setUpdateInput] = useState('');
   const [updateClicked, setUpdateClicked] = useState(false);
   const [cancelClicked, setCancelClicked] = useState(false);
@@ -41,15 +40,6 @@ const App = () => {
   const [completedTasks, setCompletedTasks] = useState([]);
 
   // READ - See JSX return
-
-  // UPDATE - Updates a todo from the todo list in edit mode
-  // Async funtion awaits update of state variables for input focus onClick
-  const updateTodo = async (task, i) => {
-    await setUpdateClicked(true);
-    await setSelectedTask(i);
-    await setUpdateInput(task);
-    update.current.focus();
-  }
 
   // CONFIRM EDIT - Confirms the edit and ends the editing process
   const confirmEdit = (task, i) => {
@@ -103,11 +93,11 @@ const App = () => {
             markCompleted={markCompleted}
             updateClicked={updateClicked}
             confirmEdit={confirmEdit}
-            update={update}
             cancelEdit={cancelEdit}
             cancelClicked={cancelClicked}
-            updateTodo={updateTodo}
             removeTodo={removeTodo}
+            setSelectedTask={setSelectedTask}
+            setUpdateClicked={setUpdateClicked}
       /> 
     </div>
   )
