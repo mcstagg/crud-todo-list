@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 import './App.css';
-import Quote from './Quote';
-import Create from './Create';
-import Read from './Read';
+import Create from './components/Create';
+import Quote from './components/Quote';
+import Read from './components/Read';
 
 // The CRUD Homework Assignment!
 

@@ -3,9 +3,8 @@ import Delete from './Delete';
 import ShowTodo from './ShowTodo';
 import Update from './Update';
 
-function Read({ todos, setTodos }) {
 
-  // TODO: Refactor the app and break it up into components
+function Read({ todos, setTodos }) {
 
   // VARIABLES
   const update = useRef(null);
@@ -70,7 +69,11 @@ function Read({ todos, setTodos }) {
 
               {/* Show update and delete buttons only if NOT in edit mode */}
               {cancelClicked !== true && selectedTask !== i && (
-                <Delete task={task} i={i} updateTodo={updateTodo} removeTodo={removeTodo} />
+                <Delete 
+                  task={task} 
+                  i={i} 
+                  updateTodo={updateTodo} 
+                  removeTodo={removeTodo} />
               )}
             </li>
           ))}
