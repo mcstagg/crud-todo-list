@@ -16,13 +16,6 @@ const Read = ({ todos, setTodos }) => {
   const [updateInput, setUpdateInput] = useState('');
   const update = useRef(null);
 
-  // CANCEL EDIT - Cancels the editing process
-  const cancelEdit = i => {
-    setCancelClicked(false);
-    setUpdateClicked(false);
-    setSelectedTask(i);
-  }
-
   return (
     <div>
       <h2><u>READ To Dos:</u></h2>
@@ -41,28 +34,29 @@ const Read = ({ todos, setTodos }) => {
               {/* Show update input field ONLY if update button is clicked and ONLY for the currently selected task */}
               {updateClicked === true && selectedTask === i && (
                 <EditMode
-                  update={update}
-                  updateInput={updateInput}
-                  setUpdateInput={setUpdateInput}
-                  cancelEdit={cancelEdit}
-                  task={task}
                   i={i}
+                  task={task}
                   todos={todos}
                   setTodos={setTodos}
+                  update={update}
+                  updateInput={updateInput}
+                  setUpdateInput={setUpdateInput}          
                   setSelectedTask={setSelectedTask}
                   setUpdateClicked={setUpdateClicked}
+                  setCancelClicked={setCancelClicked}
                 />
               )}
 
               {/* Show update and delete buttons only if NOT in edit mode */}
               {cancelClicked !== true && selectedTask !== i && (
                 <UpdateAndDelete 
-                  task={task} 
                   i={i} 
+                  task={task} 
                   todos={todos}
                   setTodos={setTodos}
-                  setUpdateClicked={setUpdateClicked}
+                  update={update}
                   setSelectedTask={setSelectedTask}
+                  setUpdateClicked={setUpdateClicked}
                   setUpdateInput={setUpdateInput}
                 />
               )}

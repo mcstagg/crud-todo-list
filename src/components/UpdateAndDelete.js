@@ -1,14 +1,14 @@
 // UPDATE AND DELETE FUNCTIONALITY 
 
 const UpdateAndDelete = ({ 
+  i, 
   task, 
-  i , 
   todos,
   setTodos,
-  setUpdateClicked, 
+  update,
   setSelectedTask, 
-  setUpdateInput,
-  update }) => {
+  setUpdateClicked, 
+  setUpdateInput }) => {
 
   // UPDATE - Updates a todo from the todo list in edit mode
   // Async funtion awaits update of state variables for input focus onClick

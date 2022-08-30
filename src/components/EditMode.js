@@ -1,16 +1,16 @@
 // EDIT MODE FUNCTIONALITY
 
 const EditMode = ({  
+  i,
+  task,
+  todos,
+  setTodos,
   update, 
   updateInput, 
   setUpdateInput, 
-  cancelEdit, 
-  task, 
-  i,
-  todos,
-  setTodos,
   setSelectedTask,
-  setUpdateClicked }) => {
+  setUpdateClicked,
+  setCancelClicked }) => {
   
   // CONFIRM EDIT - Confirms the edit and ends the editing process
   const confirmEdit = (task, i) => {
@@ -23,6 +23,13 @@ const EditMode = ({
     setUpdateClicked(false);
     setUpdateInput('');
     setSelectedTask(undefined);
+  }
+
+  // CANCEL EDIT - Cancels the editing process
+  const cancelEdit = i => {
+    setCancelClicked(false);
+    setUpdateClicked(false);
+    setSelectedTask(i);
   }
 
   return (
