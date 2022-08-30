@@ -1,39 +1,26 @@
-import React, { useRef, useState } from 'react';
-import Delete from './Delete';
+import { useRef, useState } from 'react';
 import ShowTodo from './ShowTodo';
-import Update from './Update';
+import EditMode from './EditMode';
+import UpdateAndDelete from './UpdateAndDelete';
 
+const Read = ({ todos, setTodos }) => {
 
-function Read({ todos, setTodos }) {
+  // BUG FIXES
+  // TODO: When you delete a todo item from above the input field while in
+  // edit mode... the todo items slide up and you begin editing the wrong item
 
   // VARIABLES
-  const update = useRef(null);
   const [selectedTask, setSelectedTask] = useState(undefined);
-
-  const [updateInput, setUpdateInput] = useState('');
   const [updateClicked, setUpdateClicked] = useState(false);
   const [cancelClicked, setCancelClicked] = useState(false);
-
-  // UPDATE - Updates a todo from the todo list in edit mode
-  // Async funtion awaits update of state variables for input focus onClick
-  const updateTodo = async (task, i) => {
-    await setUpdateClicked(true);
-    await setSelectedTask(i);
-    await setUpdateInput(task);
-    update.current.focus();
-  }
+  const [updateInput, setUpdateInput] = useState('');
+  const update = useRef(null);
 
   // CANCEL EDIT - Cancels the editing process
   const cancelEdit = i => {
     setCancelClicked(false);
     setUpdateClicked(false);
     setSelectedTask(i);
-  }
-
-  // DELETE - The ability to delete a todo from the todo list
-  const removeTodo = i => {
-    const removeItem = todos.filter((todo, index) => index !== i);
-    setTodos(removeItem);
   }
 
   return (
@@ -53,7 +40,7 @@ function Read({ todos, setTodos }) {
 
               {/* Show update input field ONLY if update button is clicked and ONLY for the currently selected task */}
               {updateClicked === true && selectedTask === i && (
-                <Update 
+                <EditMode
                   update={update}
                   updateInput={updateInput}
                   setUpdateInput={setUpdateInput}
@@ -69,11 +56,15 @@ function Read({ todos, setTodos }) {
 
               {/* Show update and delete buttons only if NOT in edit mode */}
               {cancelClicked !== true && selectedTask !== i && (
-                <Delete 
+                <UpdateAndDelete 
                   task={task} 
                   i={i} 
-                  updateTodo={updateTodo} 
-                  removeTodo={removeTodo} />
+                  todos={todos}
+                  setTodos={setTodos}
+                  setUpdateClicked={setUpdateClicked}
+                  setSelectedTask={setSelectedTask}
+                  setUpdateInput={setUpdateInput}
+                />
               )}
             </li>
           ))}

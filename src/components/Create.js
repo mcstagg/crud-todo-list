@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react';
 
-function Create({ todos, setTodos }) {
+const Create = ({ todos, setTodos }) => {
 
   // Variables
   const create = useRef(null);
   const [input, setInput] = useState('');
-
+  
   // Focus on the CREATE input field on mount/inital render only
   useEffect(() => {
     create.current.focus();
+    console.log(React.version);
   }, []);
 
   /* CREATE - Adds a todo to the todos array if the string in not empty. 

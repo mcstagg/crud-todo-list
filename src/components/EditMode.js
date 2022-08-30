@@ -1,16 +1,16 @@
-import React from 'react';
+// EDIT MODE FUNCTIONALITY
 
-function Update({  
-    update, 
-    updateInput, 
-    setUpdateInput, 
-    cancelEdit, 
-    task, 
-    i,
-    todos,
-    setTodos,
-    setSelectedTask,
-    setUpdateClicked }) {
+const EditMode = ({  
+  update, 
+  updateInput, 
+  setUpdateInput, 
+  cancelEdit, 
+  task, 
+  i,
+  todos,
+  setTodos,
+  setSelectedTask,
+  setUpdateClicked }) => {
   
   // CONFIRM EDIT - Confirms the edit and ends the editing process
   const confirmEdit = (task, i) => {
@@ -47,4 +47,4 @@ function Update({
   )
 }
 
-export default Update;
+export default EditMode;
