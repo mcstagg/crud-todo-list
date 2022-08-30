@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
-import Create from './Create';
 import Quote from './Quote';
+import Create from './Create';
 import Read from './Read';
 
 // The CRUD Homework Assignment!
@@ -11,6 +11,8 @@ import Read from './Read';
 // TODO: The TODO app should be styled appropriately (you could use Glassmorphism!)
 
 // TODO: Refactor the app and break it up into components
+
+// TODO: Refactor and break css up into component specific modules
 
 // TODO: CHALLENGE 1: Persist the TODO's locally so that when the user refreshes the page, the list of TODO's is preserved!
 
@@ -24,12 +26,12 @@ import Read from './Read';
 
 // Console warnings/errors
 
-// TODO: Warning: ReactDOM.render is no longer supported in React 18. Use createRoot instead.
+// TODO: Warning: ReactDOM.render is no longer supported in React 18. Use createRoot instead. Until you switch to the new API, your app will behave as if it's running React 17. Learn more: https://reactjs.org/link/switch-to-createroot
 
 const App = () => {
 
   // Variables
-  const create = useRef(null);
+  // const create = useRef(null);
   const update = useRef(null);
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
@@ -38,22 +40,6 @@ const App = () => {
   const [cancelClicked, setCancelClicked] = useState(false);
   const [selectedTask, setSelectedTask] = useState(undefined);
   const [completedTasks, setCompletedTasks] = useState([]);
-
-  // Focus on the CREATE input field on mount/inital render only
-  useEffect(() => {
-    create.current.focus();
-  }, []);
-
-  // CREATE - Adds a todo to the todos array if the string in not empty. The todo is 
-  // automatically capitalized and the input field is reset and refocused.
-  const addTodo = e => {
-    e.preventDefault();
-    if (input != '') {
-      setTodos([...todos, input.charAt(0).toLocaleUpperCase() + input.slice(1)]);
-    }   
-    setInput(['']);
-    create.current.focus();
-  }
 
   // READ - See JSX return
 
@@ -107,10 +93,10 @@ const App = () => {
   return (
     <div className="app">
       <Quote />
-      <Create create={create} 
-              input={input} 
-              setInput={setInput} 
-              addTodo={addTodo}
+      <Create input={input} 
+              setInput={setInput}
+              todos={todos}
+              setTodos={setTodos}
       />
       <Read todos={todos}
             selectedTask={selectedTask}
