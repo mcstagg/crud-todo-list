@@ -9,7 +9,7 @@ type UpdateAndDeleteProps = {
   setSelectedTask: React.Dispatch<React.SetStateAction<number>>;
   setUpdateClicked: React.Dispatch<React.SetStateAction<boolean>>;
   setUpdateInput: React.Dispatch<React.SetStateAction<string>>;
-}
+};
 
 const UpdateAndDelete = ({ 
   i, 
@@ -28,13 +28,13 @@ const UpdateAndDelete = ({
     await setSelectedTask(i);
     await setUpdateInput(task);
     update.current?.focus();
-  }
+  };
 
   // DELETE - The ability to delete a todo from the todo list
   const removeTodo = (i: number) => {
     const removeItem = todos.filter((todo, index) => index !== i);
     setTodos(removeItem);
-  }
+  };
 
   return (
     <>
@@ -42,6 +42,6 @@ const UpdateAndDelete = ({
       <button onClick={() => removeTodo(i)}>DELETE</button>
     </>
   )
-}
+};
 
 export default UpdateAndDelete;

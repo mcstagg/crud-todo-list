@@ -2,11 +2,12 @@ import { useRef, useState } from 'react';
 import ShowTodo from './ShowTodo';
 import EditMode from './EditMode';
 import UpdateAndDelete from './UpdateAndDelete';
+import '../styles/Read.css';
 
 type ReadProps = {
   todos: string[];
   setTodos: React.Dispatch<React.SetStateAction<string[]>>;
-}
+};
 
 const Read = ({ todos, setTodos } : ReadProps ) => {
 
@@ -24,8 +25,8 @@ const Read = ({ todos, setTodos } : ReadProps ) => {
   return (
     <div>
       <h2><u>READ To Dos:</u></h2>
-      <div id="main-container">
-        <div id="todo-container">
+      <div className="main-container">
+        <div className="todo-container">
           {/* TODO: Refactor to use ID as the key instead of the Index */}
           {todos.map((task: string, i: number) => (
 
@@ -71,6 +72,6 @@ const Read = ({ todos, setTodos } : ReadProps ) => {
       </div>  
     </div>
   )
-}
+};
 
 export default Read;

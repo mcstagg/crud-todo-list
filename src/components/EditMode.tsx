@@ -11,7 +11,7 @@ type EditModeProps = {
   setSelectedTask: React.Dispatch<React.SetStateAction<number>>;
   setUpdateClicked: React.Dispatch<React.SetStateAction<boolean>>;
   setCancelClicked: React.Dispatch<React.SetStateAction<boolean>>;
-}
+};
 
 const EditMode = ({  
   i,
@@ -36,14 +36,14 @@ const EditMode = ({
     setUpdateClicked(false);
     setUpdateInput('');
     setSelectedTask(-1);
-  }
+  };
 
   // CANCEL EDIT - Cancels the editing process
   const cancelEdit = (task: string, i: number) => {
     setCancelClicked(false);
     setUpdateClicked(false);
     setSelectedTask(i);
-  }
+  };
 
   return (
     <>
@@ -65,6 +65,6 @@ const EditMode = ({
       <button onClick={() => cancelEdit(task, i)}>CANCEL</button>
     </>
   )
-}
+};
 
 export default EditMode;

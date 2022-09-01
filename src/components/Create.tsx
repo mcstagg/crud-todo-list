@@ -1,9 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
+import '../styles/Create.css';
 
 type CreateProps = {
   todos: string[];
   setTodos: React.Dispatch<React.SetStateAction<string[]>>;
-}
+};
 
 const Create = ({ todos, setTodos } : CreateProps ) => {
 
@@ -25,7 +26,7 @@ const Create = ({ todos, setTodos } : CreateProps ) => {
     }   
     setInput('');
     create.current?.focus();
-  }
+  };
 
   return (
     <div>
@@ -36,6 +37,6 @@ const Create = ({ todos, setTodos } : CreateProps ) => {
       </form>
     </div>
   )
-}
+};
 
 export default Create;

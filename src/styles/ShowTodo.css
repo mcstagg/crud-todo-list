@@ -1,0 +1,19 @@
+.task {
+  width: 20em;
+  display: flex;
+  padding-left: .27em;
+  cursor: pointer;
+  padding-top: .08em;
+}
+
+.not-completed {
+  color: black;
+  padding-left: .17em;
+}
+  
+.completed {
+  color: green;
+  text-decoration: line-through;
+  padding-left: .17em;
+}
+  

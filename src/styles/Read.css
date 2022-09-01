@@ -1,0 +1,20 @@
+h2 {
+  margin: .75em;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+}
+  
+.todo-container {
+  background-color: white;
+}
+  
+.task-container {
+  display: flex;
+}
+  
+li {
+  text-align: left;
+}
