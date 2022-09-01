@@ -1,20 +1,25 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import ShowTodo from './ShowTodo';
 import EditMode from './EditMode';
 import UpdateAndDelete from './UpdateAndDelete';
 
-const Read = ({ todos, setTodos }) => {
+type ReadProps = {
+  todos: string[];
+  setTodos: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
+const Read = ({ todos, setTodos } : ReadProps ) => {
 
   // BUG FIXES
   // TODO: When you delete a todo item from above the input field while in
   // edit mode... the todo items slide up and you begin editing the wrong item
 
   // VARIABLES
-  const [selectedTask, setSelectedTask] = useState(undefined);
-  const [updateClicked, setUpdateClicked] = useState(false);
-  const [cancelClicked, setCancelClicked] = useState(false);
-  const [updateInput, setUpdateInput] = useState('');
-  const update = useRef(null);
+  const [selectedTask, setSelectedTask] = useState<number>(-1);
+  const [updateClicked, setUpdateClicked] = useState<boolean>(false);
+  const [cancelClicked, setCancelClicked] = useState<boolean>(false);
+  const [updateInput, setUpdateInput] = useState<string>('');
+  const update = useRef<HTMLInputElement>(null);
 
   return (
     <div>
@@ -22,7 +27,7 @@ const Read = ({ todos, setTodos }) => {
       <div id="main-container">
         <div id="todo-container">
           {/* TODO: Refactor to use ID as the key instead of the Index */}
-          {todos.map((task, i) => (
+          {todos.map((task: string, i: number) => (
 
             <li key={i} className='task-container'>
               

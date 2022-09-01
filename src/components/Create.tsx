@@ -1,26 +1,31 @@
 import React, { useEffect, useState, useRef } from 'react';
 
-const Create = ({ todos, setTodos }) => {
+type CreateProps = {
+  todos: string[];
+  setTodos: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
+const Create = ({ todos, setTodos } : CreateProps ) => {
 
   // Variables
-  const create = useRef(null);
-  const [input, setInput] = useState('');
+  const create = useRef<HTMLInputElement>(null);
+  const [input, setInput] = useState<string>('');
   
   // Focus on the CREATE input field on mount/inital render only
   useEffect(() => {
-    create.current.focus();
+    create.current?.focus();
     console.log(React.version);
   }, []);
 
   /* CREATE - Adds a todo to the todos array if the string in not empty. 
   The todo is automatically capitalized and the input field is reset and refocused. */
-  const addTodo = e => {
+  const addTodo = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (input != '') {
       setTodos([...todos, input.charAt(0).toLocaleUpperCase() + input.slice(1)]);
     }   
-    setInput(['']);
-    create.current.focus();
+    setInput('');
+    create.current?.focus();
   }
 
   return (
