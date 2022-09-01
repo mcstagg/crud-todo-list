@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 type CreateProps = {
   todos: string[];
@@ -14,7 +14,6 @@ const Create = ({ todos, setTodos } : CreateProps ) => {
   // Focus on the CREATE input field on mount/inital render only
   useEffect(() => {
     create.current?.focus();
-    console.log(React.version);
   }, []);
 
   /* CREATE - Adds a todo to the todos array if the string in not empty. 

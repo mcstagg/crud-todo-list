@@ -1,10 +1,8 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import Quote from './components/Quote';
 import Create from './components/Create';
 import Read from './components/Read';
-
-// The CRUD Homework Assignment!
 
 // Your client requires a TODO list application, they have submitted a list of requirements. The application must have the following features:
 
@@ -17,8 +15,6 @@ import Read from './components/Read';
 // TODO: CHALLENGE 2: Add animations to the TODO list using this library!
 
 // TODO: The client requests that the code is submitted to Github for review, once you have done this, fill this form to send the assignment to the client!
-
-// TODO: Add TypeScpit throughout application
 
 // TODO: Set up a MERN stack and persist the TODO's remotely that when the user refreshes the page, the list of TODO's is preserved!
 

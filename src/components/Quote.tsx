@@ -7,8 +7,8 @@ import axios from 'axios';
 
 const Quote = () => {
 
-  const [quote, setQuote] = useState('');
-  const [author, setAuthor] = useState('');
+  const [quote, setQuote] = useState<string>('');
+  const [author, setAuthor] = useState<string>('');
 
   useEffect(() => {
   
