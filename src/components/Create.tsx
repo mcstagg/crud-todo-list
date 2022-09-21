@@ -1,16 +1,24 @@
-import { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, FC } from 'react';
 import '../styles/Create.css';
 
 type CreateProps = {
   todos: string[];
   setTodos: React.Dispatch<React.SetStateAction<string[]>>;
+  // marked: string;
+  // count: 0;
 };
 
-const Create = ({ todos, setTodos } : CreateProps ) => {
+type Completed = {
+  done: string;
+  notDone: string
+}
+
+const Create: FC<CreateProps> = ({ todos, setTodos }) => {
 
   // Variables
   const create = useRef<HTMLInputElement>(null);
   const [input, setInput] = useState<string>('');
+  const complete = useState<Completed>({done: "", notDone: ""});
   
   // Focus on the CREATE input field on mount/inital render only
   useEffect(() => {

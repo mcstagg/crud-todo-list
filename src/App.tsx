@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Quote from './components/Quote';
 import Create from './components/Create';
 import Read from './components/Read';
@@ -24,6 +24,19 @@ const App = () => {
 
   // VARIABLES
   const [todos, setTodos] = useState<string[]>([]);
+
+  // Get items from local storage
+  useEffect(() => {
+    const data = window.localStorage.getItem('The_Todos');
+    if (data != null) {
+      setTodos(JSON.parse(data));
+    };
+  }, []);
+
+  // Add items to local storage
+  useEffect(() => {
+    window.localStorage.setItem('The_Todos', JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <div className="app">

@@ -34,7 +34,7 @@ const Read = ({ todos, setTodos } : ReadProps ) => {
               
               {/* Show task only if its respective update button has NOT been clicked */}
               {selectedTask !== i && (
-                <ShowTodo task={task} i={i} />
+                <ShowTodo task={task} i={i} todos={todos} />
               )}
 
               {/* Show update input field ONLY if update button is clicked and ONLY for the currently selected task */}
