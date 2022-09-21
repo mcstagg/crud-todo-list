@@ -15,7 +15,7 @@ const Read = ({ todos, setTodos } : ReadProps ) => {
   const [selectedTask, setSelectedTask] = useState<number>(-1);
   const [updateClicked, setUpdateClicked] = useState<boolean>(false);
   const [cancelClicked, setCancelClicked] = useState<boolean>(false);
-  const [updateInput, setUpdateInput] = useState<string>('');
+  const [updateInput, setUpdateInput] = useState<any>('');
   const update = useRef<HTMLInputElement>(null);
 
   return (

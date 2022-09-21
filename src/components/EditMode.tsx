@@ -1,10 +1,10 @@
-// EDIT MODE FUNCTIONALITY
+import { v4 as uuidv4 } from 'uuid';
 
 type EditModeProps = {
   i: number;
   task: string;
-  todos: string[];
-  setTodos: React.Dispatch<React.SetStateAction<string[]>>;
+  todos: any;
+  setTodos: React.Dispatch<React.SetStateAction<any>>;
   update: React.RefObject<HTMLInputElement>;
   updateInput: string;
   setUpdateInput: React.Dispatch<React.SetStateAction<string>>;
@@ -24,14 +24,11 @@ const EditMode = ({
   setSelectedTask,
   setUpdateClicked,
   setCancelClicked } : EditModeProps ) => {
-  
+
   // CONFIRM EDIT - Confirms the edit and ends the editing process
-  const confirmEdit = (task: string, i: number) => {
-    // add edited todo back to the dom
-    // update the todo onclick or onsumbit
-    const newTodos: string[] = [...todos];
-    //newTodos.push(task);
-    newTodos.splice(i, 1, updateInput.charAt(0).toLocaleUpperCase() + updateInput.slice(1));
+  const confirmEdit = async (task: string, i: number) => {
+    const newTodos: any = [...todos];
+    newTodos.splice(i, 1, {todo: updateInput.charAt(0).toLocaleUpperCase() + updateInput.slice(1), id: uuidv4()});
     setTodos(newTodos);
     setUpdateClicked(false);
     setUpdateInput('');
