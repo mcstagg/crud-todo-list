@@ -23,7 +23,7 @@ import './App.css';
 const App = () => {
 
   // VARIABLES
-  const [todos, setTodos] = useState<string[]>([]);
+  const [todos, setTodos] = useState<any>([]);
 
   // Get items from local storage
   useEffect(() => {

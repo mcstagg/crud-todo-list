@@ -4,7 +4,7 @@ import '../styles/ShowTodo.css';
 type TodoProps = {
   task: string;
   i: any;
-  todos: string[];
+  todos: any;
 };
 
 const ShowTodo = ({ task, i, todos }: TodoProps ) => {
@@ -20,9 +20,9 @@ const ShowTodo = ({ task, i, todos }: TodoProps ) => {
   // }, []);
 
   // Add items to local storage
-  useEffect(() => {
-    window.localStorage.setItem('Marked_Todos', JSON.stringify(completedTasks));
-  }, [completedTasks]);
+  // useEffect(() => {
+  //   window.localStorage.setItem('Marked_Todos', JSON.stringify(completedTasks));
+  // }, [completedTasks]);
 
   // MARK COMPLETED - Changes the styling of a specific todo item if it is clicked to 
   // signify that the task has been completed and can be crossed off the list or 

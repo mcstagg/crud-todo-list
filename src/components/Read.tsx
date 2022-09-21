@@ -5,15 +5,11 @@ import UpdateAndDelete from './UpdateAndDelete';
 import '../styles/Read.css';
 
 type ReadProps = {
-  todos: string[];
-  setTodos: React.Dispatch<React.SetStateAction<string[]>>;
+  todos: any;
+  setTodos: React.Dispatch<React.SetStateAction<any>>;
 };
 
 const Read = ({ todos, setTodos } : ReadProps ) => {
-
-  // BUG FIXES
-  // TODO: When you delete a todo item from above the input field while in
-  // edit mode... the todo items slide up and you begin editing the wrong item
 
   // VARIABLES
   const [selectedTask, setSelectedTask] = useState<number>(-1);
@@ -27,21 +23,20 @@ const Read = ({ todos, setTodos } : ReadProps ) => {
       <h2><u>READ To Dos:</u></h2>
       <div className="main-container">
         <div className="todo-container">
-          {/* TODO: Refactor to use ID as the key instead of the Index */}
-          {todos.map((task: string, i: number) => (
+          {todos.map((task: any, i: any) => (
 
-            <li key={i} className='task-container'>
+            <li key={task.id} className='task-container'>
               
               {/* Show task only if its respective update button has NOT been clicked */}
               {selectedTask !== i && (
-                <ShowTodo task={task} i={i} todos={todos} />
+                <ShowTodo task={task.todo} i={i} todos={todos} />
               )}
 
               {/* Show update input field ONLY if update button is clicked and ONLY for the currently selected task */}
               {updateClicked === true && selectedTask === i && (
                 <EditMode
                   i={i}
-                  task={task}
+                  task={task.todo}
                   todos={todos}
                   setTodos={setTodos}
                   update={update}
@@ -57,7 +52,7 @@ const Read = ({ todos, setTodos } : ReadProps ) => {
               {cancelClicked !== true && selectedTask !== i && (
                 <UpdateAndDelete 
                   i={i} 
-                  task={task} 
+                  task={task.todo} 
                   todos={todos}
                   setTodos={setTodos}
                   update={update}

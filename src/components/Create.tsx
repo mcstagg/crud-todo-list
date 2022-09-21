@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef, FC } from 'react';
 import '../styles/Create.css';
+import { v4 as uuidv4 } from 'uuid';
 
 type CreateProps = {
-  todos: string[];
-  setTodos: React.Dispatch<React.SetStateAction<string[]>>;
+  todos: any;
+  setTodos: React.Dispatch<React.SetStateAction<any>>;
   // marked: string;
   // count: 0;
 };
@@ -30,7 +31,8 @@ const Create: FC<CreateProps> = ({ todos, setTodos }) => {
   const addTodo = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (input != '') {
-      setTodos([...todos, input.charAt(0).toLocaleUpperCase() + input.slice(1)]);
+      setTodos([...todos, {todo: input.charAt(0).toLocaleUpperCase() + input.slice(1), id: uuidv4()}]);
+      // [...todos, input.charAt(0).toLocaleUpperCase() + input.slice(1)]
     }   
     setInput('');
     create.current?.focus();
