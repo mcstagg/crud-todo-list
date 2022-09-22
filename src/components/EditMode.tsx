@@ -56,8 +56,8 @@ const EditMode = ({
   };
 
   return (
-    <>
-      <p>&nbsp;&bull;&nbsp;</p>
+    <div>
+      &nbsp;&bull;&nbsp;
       <input
         // Enter button submit functionality for update input field
         onKeyPress={(ev) => {
@@ -73,7 +73,7 @@ const EditMode = ({
       />
       <button onClick={() => confirmEdit(i)}>EDIT</button> 
       <button onClick={() => cancelEdit(i)}>CANCEL</button>
-    </>
+    </div>
   )
 };
 

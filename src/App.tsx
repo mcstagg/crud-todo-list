@@ -12,6 +12,8 @@ import './App.css';
 
 // TODO: Finalize all TypeScript upon completion of app logic
 
+// TODO: Combine ShowToDO and UpdateAndDelete into one ShowTodoRow component
+
 // TODO: The client requests that the code is submitted to Github for review, once you have done this, fill this form to send the assignment to the client!
 
 // Console warnings/errors

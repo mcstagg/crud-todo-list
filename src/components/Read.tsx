@@ -27,14 +27,13 @@ const Read = ({ todos, setTodos } : ReadProps ) => {
 
             <li key={task.id} className='task-container'>
               
-              {/* Show task only if its respective update button has NOT been clicked */}
+              {/* Show task, update, and delete only if NOT in edit mode */}
               {cancelClicked === true && selectedTask !== i && (
                 <>
                   <ShowTodo task={task} i={i} todos={todos} setTodos={setTodos} />
-                  {/* Show update and delete buttons only if NOT in edit mode */}
                   <UpdateAndDelete 
                     i={i} 
-                    task={task.todo} 
+                    task={task} 
                     todos={todos}
                     setTodos={setTodos}
                     update={update}
@@ -45,7 +44,7 @@ const Read = ({ todos, setTodos } : ReadProps ) => {
                 </>
               )}
 
-              {/* Show update input field ONLY if update button is clicked and ONLY for the currently selected task */}
+              {/* Show edit mode on update click ONLY for the currently selected task */}
               {updateClicked === true && selectedTask === i && (
                 <EditMode
                   i={i}

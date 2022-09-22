@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import '../styles/ShowTodo.css';
 
-type TodoProps = {
+type ShowTodoProps = {
   task: any;
   i: any;
   todos: any;
   setTodos: any;
 };
 
-const ShowTodo = ({ task, i, todos, setTodos }: TodoProps ) => {
+const ShowTodo = ({ task, i, todos, setTodos }: ShowTodoProps ) => {
 
   // MARK COMPLETED - Changes the styling of a specific todo item if it is clicked to 
   // signify that the task has been completed and can be crossed off the list or 

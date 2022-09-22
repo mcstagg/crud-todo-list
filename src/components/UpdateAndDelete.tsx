@@ -2,7 +2,7 @@
 
 type UpdateAndDeleteProps = {
   i: number;
-  task: string;
+  task: any
   todos: string[];
   setTodos: React.Dispatch<React.SetStateAction<string[]>>;
   update: React.RefObject<HTMLInputElement>;
@@ -43,10 +43,10 @@ const UpdateAndDelete = ({
   };
 
   return (
-    <>
-      <button onClick={() => updateTodo(task, i)}>UPDATE</button>
+    <div>
+      <button onClick={() => updateTodo(task.todo, i)}>UPDATE</button>
       <button onClick={() => removeTodo(i)}>DELETE</button>
-    </>
+    </div>
   )
 };
 
