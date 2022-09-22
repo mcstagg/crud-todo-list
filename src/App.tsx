@@ -8,9 +8,9 @@ import './App.css';
 
 // TODO: The TODO app should be styled appropriately (you could use Glassmorphism!)
 
-// TODO: Add animations to the TODO list using this library!
+// TODO: Add animations to the TODO list using animation library
 
-// TODO: Set up a MERN stack and persist the TODO's remotely that when the user refreshes the page, the list of TODO's is preserved!
+// TODO: Finalize all TypeScript upon completion of app logic
 
 // TODO: The client requests that the code is submitted to Github for review, once you have done this, fill this form to send the assignment to the client!
 

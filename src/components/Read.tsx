@@ -28,8 +28,21 @@ const Read = ({ todos, setTodos } : ReadProps ) => {
             <li key={task.id} className='task-container'>
               
               {/* Show task only if its respective update button has NOT been clicked */}
-              {selectedTask !== i && (
-                <ShowTodo task={task} i={i} todos={todos} setTodos={setTodos} />
+              {cancelClicked === true && selectedTask !== i && (
+                <>
+                  <ShowTodo task={task} i={i} todos={todos} setTodos={setTodos} />
+                  {/* Show update and delete buttons only if NOT in edit mode */}
+                  <UpdateAndDelete 
+                    i={i} 
+                    task={task.todo} 
+                    todos={todos}
+                    setTodos={setTodos}
+                    update={update}
+                    setSelectedTask={setSelectedTask}
+                    setUpdateClicked={setUpdateClicked}
+                    setUpdateInput={setUpdateInput}
+                  />
+                </>
               )}
 
               {/* Show update input field ONLY if update button is clicked and ONLY for the currently selected task */}
@@ -45,20 +58,6 @@ const Read = ({ todos, setTodos } : ReadProps ) => {
                   setSelectedTask={setSelectedTask}
                   setUpdateClicked={setUpdateClicked}
                   setCancelClicked={setCancelClicked}
-                />
-              )}
-
-              {/* Show update and delete buttons only if NOT in edit mode */}
-              {cancelClicked === true && selectedTask !== i && (
-                <UpdateAndDelete 
-                  i={i} 
-                  task={task.todo} 
-                  todos={todos}
-                  setTodos={setTodos}
-                  update={update}
-                  setSelectedTask={setSelectedTask}
-                  setUpdateClicked={setUpdateClicked}
-                  setUpdateInput={setUpdateInput}
                 />
               )}
             </li>

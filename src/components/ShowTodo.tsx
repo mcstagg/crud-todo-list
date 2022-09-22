@@ -17,11 +17,9 @@ const ShowTodo = ({ task, i, todos, setTodos }: TodoProps ) => {
     const newTodos: any = [...todos];
 
     if (task.isChecked === false) {
-      // TODO: Better way to do this? Retain original uuid from create?
       newTodos.splice(i, 1, {todo: task.todo, id: task.id, isChecked: true});
       setTodos(newTodos);
     } else if (task.isChecked === true) {
-      // TODO: Better way to do this? Retain original uuid from create?
       newTodos.splice(i, 1, {todo: task.todo, id: task.id, isChecked: false});
       setTodos(newTodos);
     }
