@@ -1,54 +1,41 @@
 import { useEffect, useState } from 'react';
 import '../styles/ShowTodo.css';
+import { v4 as uuidv4 } from 'uuid';
 
 type TodoProps = {
-  task: string;
+  task: any;
   i: any;
   todos: any;
+  setTodos: any;
 };
 
-const ShowTodo = ({ task, i, todos }: TodoProps ) => {
-
-  // could just as easily be a state variable right now the way this is working
-  const [completedTasks, setCompletedTasks] = useState<any>([]);
-
-  // // Get items from local storage
-  // useEffect(() => {
-  //   const data = window.localStorage.getItem('Marked_Todos');
-  //   if (data != null) {
-  //     setCompletedTasks(JSON.parse(data));
-  //   };
-  // }, []);
-
-  // Add items to local storage
-  // useEffect(() => {
-  //   window.localStorage.setItem('Marked_Todos', JSON.stringify(completedTasks));
-  // }, [completedTasks]);
+const ShowTodo = ({ task, i, todos, setTodos }: TodoProps ) => {
 
   // MARK COMPLETED - Changes the styling of a specific todo item if it is clicked to 
   // signify that the task has been completed and can be crossed off the list or 
   // conversly can be uncrossed off the list if the task had not been completed
   const markCompleted = (i: any) => {
-    console.log(i);
-    if (completedTasks.includes(i)) {
-      const removeTask = completedTasks.filter((index: any) => index !== i);
-      setCompletedTasks(removeTask);
-    } else {
-      setCompletedTasks([...completedTasks, i])
-      console.log(completedTasks);
+    const newTodos: any = [...todos];
+
+    if (task.isChecked === false) {
+      // TODO: Better way to do this? Retain original uuid from create?
+      newTodos.splice(i, 1, {todo: task.todo, id: uuidv4(), isChecked: true});
+      setTodos(newTodos);
+    } else if (task.isChecked === true) {
+      // TODO: Better way to do this? Retain original uuid from create?
+      newTodos.splice(i, 1, {todo: task.todo, id: uuidv4(), isChecked: false});
+      setTodos(newTodos);
     }
-    // console.log(completedTasks);
-    // console.log(todos);
   };
 
   return (
     <div className='task'>
       &bull;&nbsp;
-      <p // another avenue here is perhaps storing the class state in local storage
-        className={completedTasks.includes(i) ? "completed" : "not-completed"}
-        onClick={() => {markCompleted(i)}}
+      <p 
+        className={task.isChecked ? "completed" : "not-completed"}
+        onClick={()=> markCompleted(i)}
       >
-        {task}
+        {task.todo}
       </p>
     </div>
   )

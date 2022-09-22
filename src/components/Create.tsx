@@ -31,8 +31,14 @@ const Create: FC<CreateProps> = ({ todos, setTodos }) => {
   const addTodo = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (input != '') {
-      setTodos([...todos, {todo: input.charAt(0).toLocaleUpperCase() + input.slice(1), id: uuidv4()}]);
-      // [...todos, input.charAt(0).toLocaleUpperCase() + input.slice(1)]
+      setTodos([
+        ...todos, 
+        {
+          todo: input.charAt(0).toLocaleUpperCase() + input.slice(1), 
+          id: uuidv4(), 
+          isChecked: false
+        }
+      ]);
     }   
     setInput('');
     create.current?.focus();
