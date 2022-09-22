@@ -10,8 +10,6 @@ import './App.css';
 
 // TODO: Add animations to the TODO list using this library!
 
-// TODO: Persist the TODO's locally so that when the user refreshes the page, the list of TODO's is preserved!
-
 // TODO: Set up a MERN stack and persist the TODO's remotely that when the user refreshes the page, the list of TODO's is preserved!
 
 // TODO: The client requests that the code is submitted to Github for review, once you have done this, fill this form to send the assignment to the client!

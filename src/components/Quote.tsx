@@ -19,14 +19,12 @@ const Quote = () => {
     axios.get("https://type.fit/api/quotes")
       .then(res => {
         console.log(res);
-        // TODO: Randomize number based off of actual indecies of collection
-        // instead of a hard coded value the viewd lenghth of the collection, 
-        // because the length could be variable based on updates to the api
-        const randomIndex = Math.floor(Math.random() * 1644);
+        console.log(res.data.length);
+        const randomIndex = Math.floor(Math.random() * res.data.length);
         setQuote(res.data[randomIndex].text);
         setAuthor(res.data[randomIndex].author);
     })
-    // TODO: Handle fetch errors
+    .catch(err => ('Error: ' + err));
   };
 
   return (
