@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import '../styles/ShowTodo.css';
-import { v4 as uuidv4 } from 'uuid';
 
 type TodoProps = {
   task: any;
@@ -19,11 +18,11 @@ const ShowTodo = ({ task, i, todos, setTodos }: TodoProps ) => {
 
     if (task.isChecked === false) {
       // TODO: Better way to do this? Retain original uuid from create?
-      newTodos.splice(i, 1, {todo: task.todo, id: uuidv4(), isChecked: true});
+      newTodos.splice(i, 1, {todo: task.todo, id: task.id, isChecked: true});
       setTodos(newTodos);
     } else if (task.isChecked === true) {
       // TODO: Better way to do this? Retain original uuid from create?
-      newTodos.splice(i, 1, {todo: task.todo, id: uuidv4(), isChecked: false});
+      newTodos.splice(i, 1, {todo: task.todo, id: task.id, isChecked: false});
       setTodos(newTodos);
     }
   };

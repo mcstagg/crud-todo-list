@@ -36,7 +36,7 @@ const Read = ({ todos, setTodos } : ReadProps ) => {
               {updateClicked === true && selectedTask === i && (
                 <EditMode
                   i={i}
-                  task={task.todo}
+                  task={task}
                   todos={todos}
                   setTodos={setTodos}
                   update={update}
