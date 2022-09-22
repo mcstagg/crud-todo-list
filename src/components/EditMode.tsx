@@ -28,18 +28,24 @@ const EditMode = ({
   // CONFIRM EDIT - Confirms the edit and ends the editing process
   const confirmEdit = async (i: number) => {
     const newTodos: any = [...todos];
+    // TODO: Better way to do this? Retain original uuid from create?
     newTodos.splice(i, 1, {todo: updateInput.charAt(0).toLocaleUpperCase() + updateInput.slice(1), id: uuidv4()});
     setTodos(newTodos);
+    // Turn off update click button flag to return to default list view
     setUpdateClicked(false);
     setUpdateInput('');
+    // Set the specific task index tracker back to default standby mode
     setSelectedTask(-1);
   };
 
   // CANCEL EDIT - Cancels the editing process
   const cancelEdit = (i: number) => {
-    setCancelClicked(false);
+    // Set cancel button clicked flag to true
+    setCancelClicked(true);
+    // Change update click button flag to leave edit mode
     setUpdateClicked(false);
-    setSelectedTask(i);
+    // Rest specfic task marker back to default standby mode
+    setSelectedTask(-1);
   };
 
   return (

@@ -24,7 +24,7 @@ const UpdateAndDelete = ({
   // UPDATE - Updates a todo from the todo list in edit mode
   // Async funtion awaits update of state variables for input focus onClick
   const updateTodo = async (task: any, i: number) => {
-    // Throw true/1 flag for button click
+    // Throw true/1 flag for button click to enter edit mode
     await setUpdateClicked(true);
     // Mark and track which items update button was clicked
     await setSelectedTask(i);

@@ -9,6 +9,7 @@ type TodoProps = {
 
 const ShowTodo = ({ task, i, todos }: TodoProps ) => {
 
+  // could just as easily be a state variable right now the way this is working
   const [completedTasks, setCompletedTasks] = useState<any>([]);
 
   // // Get items from local storage
@@ -43,7 +44,7 @@ const ShowTodo = ({ task, i, todos }: TodoProps ) => {
   return (
     <div className='task'>
       &bull;&nbsp;
-      <p 
+      <p // another avenue here is perhaps storing the class state in local storage
         className={completedTasks.includes(i) ? "completed" : "not-completed"}
         onClick={() => {markCompleted(i)}}
       >

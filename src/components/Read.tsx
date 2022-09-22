@@ -14,7 +14,7 @@ const Read = ({ todos, setTodos } : ReadProps ) => {
   // VARIABLES
   const [selectedTask, setSelectedTask] = useState<number>(-1);
   const [updateClicked, setUpdateClicked] = useState<boolean>(false);
-  const [cancelClicked, setCancelClicked] = useState<boolean>(false);
+  const [cancelClicked, setCancelClicked] = useState<boolean>(true);
   const [updateInput, setUpdateInput] = useState<any>('');
   const update = useRef<HTMLInputElement>(null);
 
@@ -49,7 +49,7 @@ const Read = ({ todos, setTodos } : ReadProps ) => {
               )}
 
               {/* Show update and delete buttons only if NOT in edit mode */}
-              {cancelClicked !== true && selectedTask !== i && (
+              {cancelClicked === true && selectedTask !== i && (
                 <UpdateAndDelete 
                   i={i} 
                   task={task.todo} 
