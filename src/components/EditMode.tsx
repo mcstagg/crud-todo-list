@@ -26,7 +26,7 @@ const EditMode = ({
   setCancelClicked } : EditModeProps ) => {
 
   // CONFIRM EDIT - Confirms the edit and ends the editing process
-  const confirmEdit = async (task: string, i: number) => {
+  const confirmEdit = async (i: number) => {
     const newTodos: any = [...todos];
     newTodos.splice(i, 1, {todo: updateInput.charAt(0).toLocaleUpperCase() + updateInput.slice(1), id: uuidv4()});
     setTodos(newTodos);
@@ -36,7 +36,7 @@ const EditMode = ({
   };
 
   // CANCEL EDIT - Cancels the editing process
-  const cancelEdit = (task: string, i: number) => {
+  const cancelEdit = (i: number) => {
     setCancelClicked(false);
     setUpdateClicked(false);
     setSelectedTask(i);
@@ -50,7 +50,7 @@ const EditMode = ({
         onKeyPress={(ev) => {
           if (ev.key === "Enter") {
             ev.preventDefault();
-            confirmEdit(task, i);
+            confirmEdit(i);
           }
         }}
         ref={update} 
@@ -58,8 +58,8 @@ const EditMode = ({
         onChange={e => setUpdateInput(e.target.value)} 
         type="text"
       />
-      <button onClick={() => confirmEdit(task, i)}>EDIT</button> 
-      <button onClick={() => cancelEdit(task, i)}>CANCEL</button>
+      <button onClick={() => confirmEdit(i)}>EDIT</button> 
+      <button onClick={() => cancelEdit(i)}>CANCEL</button>
     </>
   )
 };
